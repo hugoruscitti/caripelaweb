@@ -1,4 +1,4 @@
-var fs = require('fs');
+//var fs = require('fs');
 var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ui.bootstrap']);
 
 app.config(['$routeProvider', function($routeProvider) { $routeProvider.

@@ -113,6 +113,7 @@ app.controller('EditorCtrl', function($scope, Canvas, $location, MisArchivos) {
   */
   function actualizar_listado_directorios() {
 
+    /*
     fs.readdir(path, function(error, data) {
       $scope.data.directorios = [];
 
@@ -130,6 +131,7 @@ app.controller('EditorCtrl', function($scope, Canvas, $location, MisArchivos) {
 
       $scope.$apply();
     });
+    */
   }
 
   // Solicita cargar todos los directorios para generar la
@@ -167,8 +169,8 @@ app.controller('EditorCtrl', function($scope, Canvas, $location, MisArchivos) {
 
 
   $scope.definir_como_mi_avatar = function() {
-    var ruta_avatar = process.env.HOME + '/.huayra-compartir_avatar';
-    Canvas.guardar_como_archivo_png(ruta_avatar);
+    //var ruta_avatar = process.env.HOME + '/.huayra-compartir_avatar';
+    //Canvas.guardar_como_archivo_png(ruta_avatar);
   }
 
 
@@ -177,7 +179,9 @@ app.controller('EditorCtrl', function($scope, Canvas, $location, MisArchivos) {
     $scope.data.guardando = true;
 
     Canvas.guardar(nombre, function() {
+      /*
       MisArchivos.actualizar();
+      */
 
       setTimeout(function() {
         $location.path('/selector');

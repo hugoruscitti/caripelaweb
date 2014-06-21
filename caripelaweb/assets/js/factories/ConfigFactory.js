@@ -1,8 +1,9 @@
 var app = angular.module('app');
 
 app.factory("Config", function() {
-  var configuracion = require('./package.json');
-  var Config = configuracion.config;
+  //var configuracion = require('./package.json');
+  //var Config = configuracion.config;
+  Config = {};
 
   return Config;
 })

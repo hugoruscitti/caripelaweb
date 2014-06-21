@@ -1,4 +1,4 @@
-var fs = require('fs');
+//var fs = require('fs');
 var app = angular.module('app');
 
 var sel_Rect = undefined;
@@ -31,7 +31,7 @@ fabric.util.object.extend(fabric.Canvas.prototype, {
 
 app.factory("Canvas", function() {
   var Canvas = {}
-  var ruta_mis_archivos = process.env.HOME + '/.caripela/'
+  //var ruta_mis_archivos = process.env.HOME + '/.caripela/'
 
   Canvas.actualizar = function() {
     Canvas.canvas = new fabric.Canvas('canvas');
@@ -122,7 +122,8 @@ app.factory("Canvas", function() {
   Canvas.guardar_como_archivo_svg = function(ruta) {
       var data = Canvas.canvas.toSVG();
 
-      fs.writeFile(ruta, data, 'utf-8', informar_error);
+      alert("TODO EXPORTAR SVG" + ruta);
+      //fs.writeFile(ruta, data, 'utf-8', informar_error);
   }
 
   Canvas.guardar_como_archivo_png = function(ruta, success) {
@@ -130,6 +131,8 @@ app.factory("Canvas", function() {
     var data = Canvas.canvas.toDataURL({format: 'png'});
     var base64Data = data.replace(/^data:image\/png;base64,/, "");
 
+    alert("TODO EXPORTAR PNG" + ruta);
+    /*
     fs.writeFile(ruta, base64Data, 'base64', function(err) {
       if (err) {
         informar_error.call(this, err);
@@ -138,6 +141,7 @@ app.factory("Canvas", function() {
           success.call(this);
       }
     });
+    */
   }
 
   Canvas.definir_fondo = function(ruta, preferencias) {
@@ -248,12 +252,14 @@ app.factory("Canvas", function() {
     Canvas.deseleccionar_todo();
 
     Canvas.guardar_como_archivo_png(ruta_png, function() {
+      /*
       fs.writeFile(filename, JSON.stringify(data, null, 4), function(err) {
         if (err)
           alert(err);
 
         success.apply(this);
       });
+      */
     });
   }
 
@@ -262,6 +268,7 @@ app.factory("Canvas", function() {
   }
 
   Canvas.cargar = function(ruta) {
+    /*
 
     fs.readFile(ruta, 'utf8', function (err, data) {
       if (err) {
@@ -273,6 +280,7 @@ app.factory("Canvas", function() {
       var canvas = Canvas.canvas;
       canvas.loadFromJSON(data, canvas.renderAll.bind(canvas));
     });
+    */
   }
 
   return Canvas;

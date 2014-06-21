@@ -1,8 +1,8 @@
-var fs = require('fs');
+//var fs = require('fs');
 var app = angular.module('app');
 
 app.factory("MisArchivos", function() {
-  var ruta_mis_archivos = process.env.HOME + '/.caripela/';
+  //var ruta_mis_archivos = process.env.HOME + '/.caripela/';
   var obj = {archivos: [], numero_maximo: 0};
 
   obj.obtener_numero = function() {
@@ -10,6 +10,7 @@ app.factory("MisArchivos", function() {
   }
 
   function borrar_archivo(ruta) {
+    /*
     fs.exists(ruta, function(exists) {
 
       if (exists) {
@@ -19,18 +20,23 @@ app.factory("MisArchivos", function() {
         });
       }
     });
+
+    */
   }
 
   obj.eliminar = function(obj_a_eliminar) {
+    /*
     obj.archivos = _(obj.archivos).reject(function(e) {
       return (e.ruta_json == obj_a_eliminar.ruta_json);
     });
 
     borrar_archivo(obj_a_eliminar.ruta_json);
     borrar_archivo(obj_a_eliminar.ruta_png);
+    */
   }
 
   obj.actualizar = function() {
+    /*
 
     if (fs.existsSync(ruta_mis_archivos)) {
       var listado_archivos = fs.readdirSync(ruta_mis_archivos);
@@ -65,8 +71,9 @@ app.factory("MisArchivos", function() {
     else {
       fs.mkdirSync(ruta_mis_archivos);
     }
+    */
   }
 
-  obj.actualizar();
+  //obj.actualizar();
   return obj;
 })
