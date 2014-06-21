@@ -1,0 +1,10 @@
+{
+  "x": 230,
+  "y": 100,
+  "ancho": 150,
+  "alto": 100,
+  "z": -4,
+  "doble": true,
+  "admite_duplicados": true,
+  "distancia_entre_dobles": 180
+}

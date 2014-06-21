@@ -1,0 +1,30 @@
+<div class="navbar navbar-inverse navbar-huayra">
+  <div class="navbar-header navbar-header-huayra">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-inverse-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <span class="navbar-brand navbar-brand-huayra"><img src='imagenes/icono.png'> huayra caripela</span>
+  </div>
+</div>
+
+
+<div class="selector">
+
+      <ul class="clearing-thumbs" data-clearing="" style="">
+        <li><a ng-click='crear_avatar()' href class="th objeto"><img class='resize_fit_center' src='imagenes/crear_caripela.png'></a></li>
+        <li ng-repeat='obj in data.mis_archivos'  class='objeto'>
+            <div class="dropdown" on-toggle="toggled(open)">
+              <a href class="dropdown-toggle">↻</a>
+
+              <ul class="dropdown-menu">
+                <li><a ng-click='abrir_avatar(obj)' href>Crear desde aquí</a></li>
+                <li><a ng-click='borrar_avatar(obj)' href>Borrar</a></li>
+              </ul>
+            </div>
+          <button ng-click='abrir_avatar(obj)'><img class='resize_fit_center' ng-src="{{obj.ruta_png}}"></button>
+        </li>
+
+      </ul>
+</div>

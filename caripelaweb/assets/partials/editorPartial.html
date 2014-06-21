@@ -1,0 +1,69 @@
+  <div class="navbar navbar-inverse navbar-huayra">
+    <div class="navbar-header navbar-header-huayra">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-inverse-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <span class="navbar-brand navbar-brand-huayra"><img src='imagenes/icono.png'> huayra caripela</span>
+    </div>
+    <div class="navbar-collapse collapse navbar-inverse-collapse">
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Archivo <b class="caret"></b></a>
+          <ul class="dropdown-menu dropdown-menu-huayra">
+            <li><a href ng-click="guargar_png()">Guardar como PNG</a></li>
+            <li><a href ng-click="guardar_svg()">Guardar como SVG</a></li>
+            <li><a href ng-click='definir_como_mi_avatar()'>Definir como mi avatar de usuario</a></li>
+            <li class="divider"></li>
+            <li><a href ng-click="salir()">Cancelar y regresar</a></li>
+          </ul>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href ng-click='abrir_modo_desarrollador()'>&nbsp;<i class="glyphicon glyphicon-cog"></i></a></li>
+        <li><a href ng-click='actualizar()'>&nbsp;<i class="glyphicon glyphicon-refresh"></i></a></li>
+      </ul>
+    </div>
+  </div>
+
+
+
+
+  <div>
+    <div class="avatar">
+
+      <canvasfabric></canvasfabric>
+
+      <div class='botones'>
+        <button ng-click="guardar_y_regresar()" ng-disabled="data.guardando" class='btn btn-tiny btn-success'><i class="fi-left"></i> Guardar caripela</button>
+        <button ng-click="borrar_elemento_seleccionado()" ng-disabled='! data.hay_elemento_seleccionado' class='btn btn-tiny btn-danger' style='float: right; margin-left: 10px'><i class="glyphicon glyphicon-trash" tooltip="Borrar el objeto seleccionado"></i></button>
+        <button ng-click="espejar_elemento_seleccionado()" ng-disabled='! data.hay_elemento_seleccionado' class='btn btn-tiny btn-info' style='float: right;'><i class="glyphicon glyphicon-resize-horizontal" tooltip="Espejar el objeto seleccionado"></i></button>
+      </div>
+
+    </div>
+
+    <div class="galeria">
+      <tabset>
+        <tab ng-repeat="dir in data.directorios" heading="{{dir.titulo | categoria }}" active="dir.active">
+          <div class='contenido-tab'>
+            <div ng-show='! dir.tiene_preferencias' data-alert class="alert-box secondary">
+              m... el directorio <code>partes/{{dir.titulo}}</code> no tiene un archivo <code>preferencias.json</code> dentro, mejor creá uno.
+            </div>
+
+            <ul class="clearing-thumbs" data-clearing="" style="">
+              <li ng-repeat='obj in dir.objetos'><button ng-click='selecciona_objeto(obj, dir)' class="th objeto"><img class='resize_fit_center' ng-src="{{obj.src}}"></button></li>
+              <li><a ng-click='abrir_directorio(dir)' href class="th objeto"><img class='resize_fit_center' src='imagenes/agregar.png'></a></li>
+            </ul>
+          </div>
+        </tab>
+      </tabset>
+
+    </div>
+  </div>
+
+
+<div class='invisible'>
+  <input id="guardar_svg" type="file" nwsaveas="avatar.svg" accept="svg/*.svg"/>
+  <input id="guardar_png" type="file" nwsaveas="avatar.png" accept="png/*.png"/>
+</div>

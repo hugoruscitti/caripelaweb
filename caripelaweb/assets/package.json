@@ -1,0 +1,15 @@
+{
+    "name": "Caripela",
+    "main": "index.html",
+    "config": {
+      "livereload": false
+    },
+    "window": {
+        "title": "Hayra Caripela",
+        "toolbar": false,
+        "width": 900,
+        "height": 550,
+        "min_width": 900,
+        "min_height": 550
+    }
+}
