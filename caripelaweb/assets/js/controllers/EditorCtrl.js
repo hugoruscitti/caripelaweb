@@ -1,6 +1,6 @@
 var app = angular.module('app');
 
-app.controller('EditorCtrl', function($scope, Canvas, $location, MisArchivos) {
+app.controller('EditorCtrl', function($scope, Canvas, $location, $http, MisArchivos) {
 
   $scope.borrar_elemento_seleccionado = function() {
     Canvas.borrar_elemento_seleccionado();
@@ -16,6 +16,13 @@ app.controller('EditorCtrl', function($scope, Canvas, $location, MisArchivos) {
   $scope.data.guardando = false;
   $scope.data.directorios = [];
   $scope.data.hay_elemento_seleccionado = false;
+
+
+  $scope.data.cantidad_caripelas = '.....';
+
+  $http.get('/caripelas/cantidad').success(function(data) {
+    $scope.data.cantidad_caripelas = data.cantidad;
+  });
 
 
   Canvas.conectar_eventos(function(estado) {
@@ -112,6 +119,11 @@ app.controller('EditorCtrl', function($scope, Canvas, $location, MisArchivos) {
   * produce un cambio en los directorios de galería.
   */
   function actualizar_listado_directorios() {
+
+    $http.get('/directorios/obtener').success(function(data) {
+      $scope.data.directorios = data;
+      $scope.$apply();
+    });
 
     /*
     fs.readdir(path, function(error, data) {

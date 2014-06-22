@@ -146,3 +146,10 @@ div.dropdown {
 .dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
 		background-color: rgba(243, 243, 243, 0.32) !important;
 }
+
+
+div.mensaje-cantidad {
+	color: gray;
+	font-size: x-large;
+	text-align: center;
+}
