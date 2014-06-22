@@ -12,6 +12,13 @@
 </div>
 
 <div class="modal-footer">
-  <button class="btn btn-success" ng-click="publicar()">Sí, quiero publicarla</button>
-  <button class="btn btn-warning" ng-click="cancelar()">Cancelar</button>
+  
+  <span ng-show='guardando'>
+    <img  src='/imagenes/guardando.gif'>
+    <span>Guardando </span>
+    &nbsp;
+  </span>
+
+  <button ng-disabled='guardando' class="btn btn-success" ng-click="publicar()">Sí, quiero publicarla</button>
+  <button ng-disabled='guardando' class="btn btn-warning" ng-click="cancelar()">Cancelar</button>
 </div>

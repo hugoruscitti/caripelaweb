@@ -188,6 +188,7 @@ app.controller('EditorCtrl', function($scope, Canvas, $modal, $location, $http, 
 
 
   var GuardarModalCtrl = function ($scope, $modalInstance) {
+    $scope.guardando = false;
 
     $scope.publicar = function() {
       var nombre = "???";
@@ -199,14 +200,15 @@ app.controller('EditorCtrl', function($scope, Canvas, $modal, $location, $http, 
           datapng: datapng,
         };
 
+        $scope.guardando = true;
         $http.post('/publicar', parametros).
             success(function(data) {
-              $modalInstance.dismiss('cancel');
 
               setTimeout(function() {
+                $modalInstance.dismiss('cancel');
                 $location.path('/selector');
                 $scope.$apply();
-              }, 2000);
+              }, 4000);
 
             }).
             error(function(error, code) {
