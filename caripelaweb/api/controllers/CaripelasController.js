@@ -43,6 +43,9 @@ module.exports = {
     fs.readdir('assets/caripelas', function(error, data) {
       var caripelas = [];
 
+      // Hace que las caripelas mas nuevas aparezcan primero.
+      data = data.sort(function(a, b) { return parseInt(a, 10) < parseInt(b, 10)});
+
       for (i in data) {
         var item = {ruta: data[i]};
 
@@ -55,6 +58,45 @@ module.exports = {
 
   },
 
+  publicar: function (req, res) {
+      if (req.param('datajson') === undefined)
+          return res.send('No has especificado el parametro datajson', 404);
+
+      if (req.param('datapng') === undefined)
+          return res.send('No has especificado el parametro datapng', 404);
+
+      var datajson = req.param('datajson');
+      var datapng = req.param('datapng');
+
+
+      // Busca crear un directorio con un numero mas grande a los
+      // existentes.
+
+      var directorios = fs.readdirSync('assets/caripelas');
+      var max = 0;
+
+      for (i in directorios) {
+        var numero = parseInt(directorios[i], 10);
+
+        if (numero > max)
+          max = numero;
+      }
+
+      max += 1;
+
+      // Genera el directorio destino.
+      var directorio_destino = 'assets/caripelas/' + max;
+      fs.mkdirSync(directorio_destino);
+
+      // Guarda la imagen PNG
+      fs.writeFile(directorio_destino + '/preview.png', datapng, 'base64', function(err) {
+        if (err) {
+          console.log(err);
+        } else {
+          res.json({codigo: "ok"});
+        }
+      });
+  },
 
 
 

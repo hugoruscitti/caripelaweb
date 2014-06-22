@@ -239,28 +239,20 @@ app.factory("Canvas", function() {
   }
 
   Canvas.guardar = function(nombre, success) {
-    var data = Canvas.canvas.toJSON();
+    Canvas.deseleccionar_todo();
+    console.log("guardar!");
 
-    for (var i=0; i< data.objects.length; i++) {
+    var datajson = Canvas.canvas.toJSON();
+    var data = Canvas.canvas.toDataURL({format: 'png'});
+    var datapng = data.replace(/^data:image\/png;base64,/, "");
+
+    for (var i=0; i< datajson.objects.length; i++) {
       var objeto_en_canvas = Canvas.canvas.getObjects()[i]
-      data.objects[i].z = objeto_en_canvas.z || 0;
-      data.objects[i].categoria = objeto_en_canvas.categoria || "";
+      datajson.objects[i].z = objeto_en_canvas.z || 0;
+      datajson.objects[i].categoria = objeto_en_canvas.categoria || "";
     }
 
-    var filename = ruta_mis_archivos + nombre + '.json';
-    var ruta_png = ruta_mis_archivos + nombre + '.png';
-    Canvas.deseleccionar_todo();
-
-    Canvas.guardar_como_archivo_png(ruta_png, function() {
-      /*
-      fs.writeFile(filename, JSON.stringify(data, null, 4), function(err) {
-        if (err)
-          alert(err);
-
-        success.apply(this);
-      });
-      */
-    });
+    success.apply(this, [datajson, datapng]);
   }
 
   Canvas.deseleccionar_todo = function() {

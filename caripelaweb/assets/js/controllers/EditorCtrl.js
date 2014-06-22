@@ -1,6 +1,6 @@
 var app = angular.module('app');
 
-app.controller('EditorCtrl', function($scope, Canvas, $location, $http, MisArchivos) {
+app.controller('EditorCtrl', function($scope, Canvas, $modal, $location, $http, MisArchivos) {
 
   $scope.borrar_elemento_seleccionado = function() {
     Canvas.borrar_elemento_seleccionado();
@@ -186,20 +186,53 @@ app.controller('EditorCtrl', function($scope, Canvas, $location, $http, MisArchi
   }
 
 
+
+  var GuardarModalCtrl = function ($scope, $modalInstance) {
+
+    $scope.publicar = function() {
+      var nombre = "???";
+
+      Canvas.guardar(nombre, function(datajson, datapng) {
+
+        var parametros = {
+          datajson: datajson,
+          datapng: datapng,
+        };
+
+        $http.post('/publicar', parametros).
+            success(function(data) {
+              $modalInstance.dismiss('cancel');
+
+              setTimeout(function() {
+                $location.path('/selector');
+                $scope.$apply();
+              }, 2000);
+
+            }).
+            error(function(error, code) {
+              console.log("error", error);
+              alert("Error, abrí el modo desarrollo para ver el detalle.");
+            });
+
+      });
+    }
+
+    $scope.cancelar = function () {
+      $modalInstance.dismiss('cancel');
+    };
+
+  };
+
+
   $scope.guardar_y_regresar = function() {
     var nombre = MisArchivos.obtener_numero().toString();
-    $scope.data.guardando = true;
 
-    Canvas.guardar(nombre, function() {
-      /*
-      MisArchivos.actualizar();
-      */
-
-      setTimeout(function() {
-        $location.path('/selector');
-        $scope.$apply();
-      }, 100);
+    var modalInstance = $modal.open({
+      templateUrl: 'partials/guardarModal.html',
+      controller: GuardarModalCtrl
     });
+
+
   }
 
   $scope.salir = function() {
