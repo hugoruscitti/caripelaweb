@@ -45,7 +45,10 @@ module.exports = {
       var caripelas = [];
 
       // Hace que las caripelas mas nuevas aparezcan primero.
-      data = data.sort(function(a, b) { return parseInt(a, 10) < parseInt(b, 10)});
+      data = data.sort(function(a, b) {
+        numero_a = parseInt(a, 10);
+        numero_b = parseInt(b, 10);
+        return numero_b - numero_a});
 
       for (i in data) {
         var item = {ruta: data[i]};
