@@ -1,4 +1,5 @@
 var fs = require('fs');
+var spawn = require('child_process').spawn;
 
 /**
  * CaripelasController
@@ -90,6 +91,13 @@ module.exports = {
 
       // Guarda la imagen PNG
       fs.writeFile(directorio_destino + '/preview.png', datapng, 'base64', function(err) {
+
+
+        spawn('convert', [directorio_destino + '/preview.png',
+                          '-resize',
+                          '100x100',
+                          directorio_destino + '/thumb.png']);
+
         if (err) {
           console.log(err);
         } else {
